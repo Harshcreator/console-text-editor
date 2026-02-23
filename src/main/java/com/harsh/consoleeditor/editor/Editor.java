@@ -2,9 +2,12 @@ package com.harsh.consoleeditor.editor;
 
 import java.util.Scanner;
 
+import com.harsh.consoleeditor.command.HistoryTreeManager;
+import com.harsh.consoleeditor.command.InsertCommand;
 import com.harsh.consoleeditor.cursor.Cursor;
 import com.harsh.consoleeditor.document.Document;
 import com.harsh.consoleeditor.render.ConsoleRenderer;
+import com.harsh.consoleeditor.command.Command;
 
 public class Editor {
     public static void main(String[] args) {
@@ -12,6 +15,7 @@ public class Editor {
         Document document = new Document();
         Cursor cursor = new Cursor();
         ConsoleRenderer renderer = new ConsoleRenderer();
+        HistoryTreeManager history = new HistoryTreeManager();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -25,7 +29,22 @@ public class Editor {
             if (input.equals("<")) {
                 cursor.moveLeft();
             }
-            
+
+            if (input.equals("u")) {
+                history.undo();
+            }
+
+            else if (input.equals("r")) {
+                if(history.getBranchCount() > 0) {
+                    history.redo(0);
+                }
+            } 
+
+            else if (!input.isEmpty()) {
+                Command cmd = new InsertCommand(document, cursor, input.charAt(0));
+                history.executeCommand(cmd);
+            }
+
             else if (input.equals(">")) {
                 cursor.moveRight(document);
             }

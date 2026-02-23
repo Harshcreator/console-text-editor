@@ -1,5 +1,6 @@
 package com.harsh.consoleeditor.command;
 
-public class Command {
-    
-}
+public interface Command {
+        void execute();
+        void undo();
+} 
