@@ -1,0 +1,10 @@
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\command\Command.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\command\CommandManager.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\command\DeleteCommand.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\command\InsertCommand.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\cursor\Cursor.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\document\Document.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\document\GapBuffer.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\editor\Editor.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\render\ConsoleRenderer.java
+C:\Projects\console-text-editor\src\main\java\com\harsh\consoleeditor\render\WordWrapper.java
