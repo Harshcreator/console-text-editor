@@ -13,14 +13,17 @@ public class InsertCommand implements Command {
             this.document = document;
             this.cursor = cursor;
             this.character = character;
+            this.position = -1;
         }
 
         @Override
         public void execute() {
-            position = cursor.getPosition();
+            if (position == -1) {
+                position = cursor.getPosition();
+            }
             document.moveCursor(position);
             document.insert(character);
-            cursor.setPosition(position + 1);;
+            cursor.setPosition(position + 1);
         }
 
         @Override

@@ -2,12 +2,13 @@ package com.harsh.consoleeditor.editor;
 
 import java.util.Scanner;
 
+import com.harsh.consoleeditor.command.Command;
+import com.harsh.consoleeditor.command.DeleteCommand;
 import com.harsh.consoleeditor.command.HistoryTreeManager;
 import com.harsh.consoleeditor.command.InsertCommand;
 import com.harsh.consoleeditor.cursor.Cursor;
 import com.harsh.consoleeditor.document.Document;
 import com.harsh.consoleeditor.render.ConsoleRenderer;
-import com.harsh.consoleeditor.command.Command;
 
 public class Editor {
     public static void main(String[] args) {
@@ -26,39 +27,34 @@ public class Editor {
 
             if (input.equals("q")) break;
 
-            if (input.equals("<")) {
+            else if (input.equals("<")) {
                 cursor.moveLeft();
-            }
-
-            if (input.equals("u")) {
-                history.undo();
-            }
-
-            else if (input.equals("r")) {
-                if(history.getBranchCount() > 0) {
-                    history.redo(0);
-                }
-            } 
-
-            else if (!input.isEmpty()) {
-                Command cmd = new InsertCommand(document, cursor, input.charAt(0));
-                history.executeCommand(cmd);
             }
 
             else if (input.equals(">")) {
                 cursor.moveRight(document);
             }
 
+            else if (input.equals("u")) {
+                history.undo();
+            }
+
+            else if (input.equals("r")) {
+                if (history.getBranchCount() > 0) {
+                    history.redo(0);
+                }
+            }
+
             else if (input.equals("-")) {
-                document.moveCursor(cursor.getPosition());
-                document.delete();
-                cursor.moveLeft();
+                if (cursor.getPosition() > 0) {
+                    Command cmd = new DeleteCommand(document, cursor);
+                    history.executeCommand(cmd);
+                }
             }
 
             else if (!input.isEmpty()) {
-                document.moveCursor(cursor.getPosition());
-                document.insert(input.charAt(0));
-                cursor.moveRight(document);
+                Command cmd = new InsertCommand(document, cursor, input.charAt(0));
+                history.executeCommand(cmd);
             }
         }
     }

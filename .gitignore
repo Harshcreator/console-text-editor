@@ -1,1 +1,9 @@
 ./target
+*.class
+*.log
+*.jar
+*.war
+*.iml
+.idea/
+.DS_Store
+*.lst
